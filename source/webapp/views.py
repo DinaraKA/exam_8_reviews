@@ -88,3 +88,10 @@ class ReviewUpdateView(LoginRequiredMixin, UpdateView):
         return reverse('webapp:product_detail', kwargs={'pk': self.object.pk})
 
 
+class ReviewDeleteView(DeleteView):
+    model = Review
+    context_object_name = 'review'
+    template_name = 'review/review_delete.html'
+
+    def get_success_url(self):
+        return reverse('webapp:product_detail', kwargs={'pk': self.object.product.pk})

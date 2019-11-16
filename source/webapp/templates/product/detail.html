@@ -30,6 +30,7 @@
                 <hr>
                 <div class="review">
                     <p><b>{{ forloop.counter }}. {{ review.author.username }}</b></p>
+                    <p>Email: {{ review.author.email }}</p>
                     <div class="pre">{{ review.text }}</div>
                     <div>Rating: {{ review.rating }} from 5</div>
                     <p class="review-links">
@@ -37,7 +38,7 @@
                             <a href="{% url 'webapp:review_update' review.pk %}">Edit</a>
 {#                        {% endif %}#}
 {#                        {% if perms.webapp.delete_task %}#}
-{#                            <a href="{% url 'webapp:task_delete' task.pk %}">Delete</a>#}
+                            <a href="{% url 'webapp:review_delete' review.pk %}">Delete</a>
 {#                        {% endif %}#}
                     </p>
                 </div>
@@ -48,7 +49,7 @@
         {% if is_paginated %}
             {% include 'partial/pagination.html' %}
         {% endif %}
-        {% if perms.webapp.add_task %}
+{#        {% if perms.webapp.add_task %}#}
             <a href="{% url 'webapp:product_review_add' product.pk %}">Add review</a>
-        {% endif %}
+{#        {% endif %}#}
 {% endblock %}

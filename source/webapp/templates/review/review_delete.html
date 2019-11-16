@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Delete Review{% endblock %}
+{% block content %}
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h3>Are you sure want to delete your review?</h3>
+            <form method="POST" action="{% url "webapp:review_delete" review.pk %}" class="text-center">
+                {% csrf_token %}
+                <p class="lead">{{ review.text }}</p>
+                <hr class="my-4">
+                <button type="submit" class="btn btn-dark" value="Подтвердить">Yes</button>
+                <button type="submit" class="btn btn-dark" value="Submit"><a href="{% url 'webapp:product_detail' review.product.pk %}">No</a></button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
