@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}{{ user_object.username }}{% endblock %}
+{% block menu %}
+{% endblock %}
+{% block content %}
+    <div class="card mb-3" style="max-width: 540px; border: none">
+        <div class="row no-gutters">
+            <div class="col-md-4" style="margin-top: 27px">
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" class="card-img-top" alt="product image">
+                {% endif %}
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h2 class="card-title">Name: {{ product.name }}</h2>
+                    <p class="card-text">Category: <b>{{ product.category }}</b></p>
+                    <p class="card-text">Description: {{ product.description }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
