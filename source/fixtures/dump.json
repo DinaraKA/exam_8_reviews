@@ -1,0 +1,32 @@
+[
+{
+  "model": "webapp.product",
+  "pk": 1,
+  "fields": {
+    "name": "Toktogul's life",
+    "category": "book",
+    "description": "kljlk;jdfklnsgkldfnbkls;fjh;lsjfhlk",
+    "image": ""
+  }
+},
+{
+  "model": "webapp.product",
+  "pk": 2,
+  "fields": {
+    "name": "Flight to Kiev",
+    "category": "other",
+    "description": "jdvkldsdlkbmv",
+    "image": ""
+  }
+},
+{
+  "model": "webapp.review",
+  "pk": 1,
+  "fields": {
+    "author": 1,
+    "product": 1,
+    "text": "jhklj;",
+    "rating": 5
+  }
+}
+]
