@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
@@ -16,6 +17,20 @@ class ProductView(DetailView):
     template_name = 'product/detail.html'
     context_object_name = 'product'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        products = context['product'].product_review.order_by('rating')
+        self.paginate_reviews_to_context(products, context)
+        return context
+
+    def paginate_reviews_to_context(self, reviews, context):
+        paginator = Paginator(reviews, 3, 0)
+        page_number = self.request.GET.get('page', 1)
+        page = paginator.get_page(page_number)
+        context['paginator'] = paginator
+        context['page_obj'] = page
+        context['reviews'] = page.object_list
+        context['is_paginated'] = page.has_other_pages()
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
