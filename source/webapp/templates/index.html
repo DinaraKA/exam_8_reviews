@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block menu %}
+{#        <li><a href="{% url 'webapp:task_add' %}">Add Product</a></li>#}
+{% endblock %}
+{% block content %}
+    <h1>Products</h1>
+    <form method="POST" action="{% url 'webapp:index' %}">
+        {% csrf_token %}
+        <table class="table">
+            <thead>
+                <tr>
+                   <th scope="col">#</th>
+                   <th scope="col">Image</th>
+                   <th scope="col" style="width: 20%">Name</th>
+                   <th scope="col" style="width: 10%">Category</th>
+                   <th scope="col" style="width: 40%">Description</th>
+                </tr>
+            </thead>
+            {% for product in products %}
+                <tbody>
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <th><img src="{{ product.image.url }}" class="img" alt="product image"></th>
+                        <td><a href="#">{{ product.name }}</a></td>
+                        <td>{{ product.category }}</td>
+                        <td>{{ product.description }}</td>
+                    </tr>
+                </tbody>
+            {% endfor %}
+        </table>
+    </form>
+{% endblock %}
