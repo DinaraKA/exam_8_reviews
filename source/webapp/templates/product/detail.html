@@ -12,6 +12,7 @@
                     <h2 class="card-title">Name: {{ product.name }}</h2>
                     <p class="card-text">Category: <b>{{ product.category }}</b></p>
                     <p class="card-text">Description: {{ product.description }}</p>
+                    <a href="{% url 'webapp:product_update' product.pk %}">Edit</a>
                 </div>
             </div>
         </div>

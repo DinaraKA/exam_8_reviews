@@ -9,10 +9,11 @@
         <table class="table">
             <thead>
                 <tr>
-                   <th scope="col">#</th>
-                   <th scope="col">Image</th>
-                   <th scope="col" style="width: 50%">Name</th>
-                   <th scope="col" style="width: 10%">Category</th>
+                    <th scope="col">#</th>
+                    <th scope="col">Image</th>
+                    <th scope="col" style="width: 50%">Name</th>
+                    <th scope="col" style="width: 10%">Category</th>
+                    <th class="symbol" scope="col">Update</th>
                 </tr>
             </thead>
             {% for product in products %}
@@ -24,6 +25,7 @@
                         {% endif %}
                         <td><a href="{% url 'webapp:product_detail' product.pk %}">{{ product.name }}</a></td>
                         <td>{{ product.category }}</td>
+                        <td class="symbol"><a href="{% url 'webapp:product_update' product.pk %}">&#x270E;</a></td>
                     </tr>
                 </tbody>
             {% endfor %}
