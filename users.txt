@@ -1,0 +1,3 @@
+Superadmin: admin, admin
+Moderator: alice, aliceadmin
+Other users: bob, bobadmin

@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
@@ -35,33 +35,39 @@ class ProductView(DetailView):
         context['is_paginated'] = page.has_other_pages()
 
 
-class ProductCreateView(LoginRequiredMixin, CreateView):
+class ProductCreateView(PermissionRequiredMixin, CreateView):
     model = Product
     template_name = 'product/product_create.html'
     fields = ['image', 'name', 'category', 'description']
+    permission_required = 'webapp.add_product'
+    permission_denied_message = 'Access is denied!'
 
     def get_success_url(self):
         return reverse('webapp:product_detail', kwargs={'pk': self.object.pk})
 
 
-class ProductUpdateView(LoginRequiredMixin, UpdateView):
+class ProductUpdateView(PermissionRequiredMixin, UpdateView):
     model = Product
     template_name = 'product/product_update.html'
     fields = ['image', 'name', 'category', 'description']
     context_object_name = 'product'
+    permission_required = 'webapp.change_product'
+    permission_denied_message = 'Access is denied!'
 
     def get_success_url(self):
         return reverse('webapp:product_detail', kwargs={'pk': self.object.pk})
 
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(PermissionRequiredMixin, DeleteView):
     model = Product
     context_object_name = 'product'
     template_name = 'product/product_delete.html'
     success_url = reverse_lazy('webapp:index')
+    permission_required = 'webapp.delete_product'
+    permission_denied_message = 'Access is denied!'
 
 
-class ProductReviewCreateView(CreateView):
+class ProductReviewCreateView(LoginRequiredMixin, CreateView):
     template_name = 'review/review_add.html'
     form_class = ProductReviewForm
 
@@ -78,20 +84,40 @@ class ProductReviewCreateView(CreateView):
         return redirect('webapp:product_detail', pk=product_pk)
 
 
-class ReviewUpdateView(LoginRequiredMixin, UpdateView):
+class ReviewUpdateView(PermissionRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Review
     template_name = 'review/review_update.html'
     fields = ['text', 'rating']
     context_object_name = 'review'
+    permission_required = 'webapp.change_review'
+    permission_denied_message = 'Access is denied!'
 
     def get_success_url(self):
         return reverse('webapp:product_detail', kwargs={'pk': self.object.pk})
 
+    def test_func(self, **kwargs):
+        review_pk = self.kwargs.get('pk')
+        review = Review.objects.get(pk=review_pk)
+        if self.request.user == review.author or self.request.user.has_perm('webapp.change_review'):
+            return True
+        else:
+            return False
 
-class ReviewDeleteView(DeleteView):
+
+class ReviewDeleteView(PermissionRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Review
     context_object_name = 'review'
     template_name = 'review/review_delete.html'
+    permission_required = 'webapp.delete_review'
+    permission_denied_message = 'Access is denied!'
 
     def get_success_url(self):
         return reverse('webapp:product_detail', kwargs={'pk': self.object.product.pk})
+
+    def test_func(self):
+        review_pk = self.kwargs.get('pk')
+        review = Review.objects.get(pk=review_pk)
+        if self.request.user == review.author or self.request.user.has_perm('webapp.delete_review'):
+            return True
+        else:
+            False

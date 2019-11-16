@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% block menu %}
+    {% if perms.webapp.add_product %}
         <li><a href="{% url 'webapp:product_add' %}">Add Product</a></li>
+    {% endif %}
 {% endblock %}
 {% block content %}
     <h1>Products</h1>
@@ -26,8 +28,12 @@
                         {% endif %}
                         <td><a href="{% url 'webapp:product_detail' product.pk %}">{{ product.name }}</a></td>
                         <td>{{ product.category }}</td>
-                        <td class="symbol"><a href="{% url 'webapp:product_update' product.pk %}">&#x270E;</a></td>
-                        <td class="symbol"><a href="{% url 'webapp:product_delete' product.pk %}">x</a></td>
+                        {% if perms.webapp.change_product %}
+                            <td class="symbol"><a href="{% url 'webapp:product_update' product.pk %}">&#x270E;</a></td>
+                        {% endif %}
+                        {% if perms.webapp.delete_product %}
+                            <td class="symbol"><a href="{% url 'webapp:product_delete' product.pk %}">x</a></td>
+                        {% endif %}
                     </tr>
                 </tbody>
             {% endfor %}
