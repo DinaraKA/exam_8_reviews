@@ -9,13 +9,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static "css/style.css" %}">
-    <title>Вход</title>
+    <title>LOGIN</title>
 </head>
 <body>
 <div class="container" style="width: 500px">
-    <h3>Issue Tracker</h3>
-    <form action="{% url 'accounts:login' %}?next={{ next }}" method="post" class="text-center">
-        {% include 'partial/form.html' with button_text='Log in' %}
+    <h3>Questionnaire</h3>
+    <form action="{% url 'accounts:login' %}" method="post" class="text-center">
+        {% include 'partial/form.html' %}
+        <input type="submit" value="Log in" class="btn btn-primary">
     </form>
 </div>
 </body>
