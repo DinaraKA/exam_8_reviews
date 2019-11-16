@@ -36,7 +36,7 @@ RATING_CHOICES = (
 
 class Review(models.Model):
     author = models.ForeignKey(User, related_name='user_review', on_delete=models.PROTECT, verbose_name='Author')
-    product = models.ForeignKey(Product, related_name='product_review', on_delete=models.PROTECT,
+    product = models.ForeignKey(Product, related_name='product_review', on_delete=models.CASCADE,
                                     verbose_name='Product')
     text = models.TextField(max_length=1000, verbose_name='Text')
     rating = models.IntegerField(choices=RATING_CHOICES, verbose_name='Rating')

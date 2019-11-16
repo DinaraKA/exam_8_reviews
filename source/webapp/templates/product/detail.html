@@ -5,6 +5,8 @@
             <div class="col-md-4" style="margin-top: 27px">
                 {% if product.image %}
                     <img src="{{ product.image.url }}" class="card-img-top" alt="product image">
+                {% else %}
+                    {% load static %}<img src="{% static "default_image.png" %}" class="card-img-top" alt="default image">
                 {% endif %}
             </div>
             <div class="col-md-8">
