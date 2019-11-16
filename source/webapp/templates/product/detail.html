@@ -48,4 +48,7 @@
         {% if is_paginated %}
             {% include 'partial/pagination.html' %}
         {% endif %}
+        {% if perms.webapp.add_task %}
+            <a href="{% url 'webapp:product_review_add' product.pk %}">Add review</a>
+        {% endif %}
 {% endblock %}

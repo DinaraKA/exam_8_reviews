@@ -1,8 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
+from webapp.forms import ProductReviewForm
 from webapp.models import Product
 
 
@@ -32,6 +34,7 @@ class ProductView(DetailView):
         context['reviews'] = page.object_list
         context['is_paginated'] = page.has_other_pages()
 
+
 class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     template_name = 'product/product_create.html'
@@ -56,3 +59,22 @@ class ProductDeleteView(DeleteView):
     context_object_name = 'product'
     template_name = 'product/product_delete.html'
     success_url = reverse_lazy('webapp:index')
+
+
+class ProductReviewCreateView(CreateView):
+    template_name = 'review/review_add.html'
+    form_class = ProductReviewForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        product = Product.objects.get(pk=self.kwargs['pk'])
+        context['product'] = product
+        return context
+
+    def form_valid(self, form):
+        product_pk = self.kwargs.get('pk')
+        product = get_object_or_404(Product, pk=product_pk)
+        product.product_review.create(author = self.request.user, **form.cleaned_data)
+        return redirect('webapp:product_detail', pk=product_pk)
+
+

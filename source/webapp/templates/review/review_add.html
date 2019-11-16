@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Add review{% endblock %}
+{% block content %}
+    <h2>Add review</h2>
+    <form method="POST" action="{% url "webapp:product_review_add" product.pk %}">
+        {% include 'partial/form.html' %}
+        <input type="submit" value="Add" class="btn btn-primary">
+    </form>
+{% endblock %}
