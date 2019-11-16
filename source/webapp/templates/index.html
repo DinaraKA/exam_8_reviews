@@ -17,6 +17,8 @@
                     <th scope="col" style="width: 10%">Category</th>
                     <th class="symbol" scope="col">Update</th>
                     <th class="symbol" scope="col">Delete</th>
+                    <th class="symbol" scope="col">Delete</th>
+
                 </tr>
             </thead>
             {% for product in products %}
@@ -25,6 +27,8 @@
                         <th scope="row">{{ forloop.counter }}</th>
                         {% if product.image %}
                             <th><img src="{{ product.image.url }}" class="img" alt="product image"></th>
+                        {% else %}
+                            <th>{% load static %}<img src="{% static "default_image.png" %}" class="img" alt="default image"></th>
                         {% endif %}
                         <td><a href="{% url 'webapp:product_detail' product.pk %}">{{ product.name }}</a></td>
                         <td>{{ product.category }}</td>
