@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}{{ user_object.username }}{% endblock %}
+{% block menu %}
+    {% if user_object == request.user %}
+{#        <li><a href="{% url "accounts:user_update" user_object.pk %}">Edit Profile</a></li>#}
+{#        <li><a href="{% url 'accounts:user_password_change' user_object.pk %}">Change Password</a></li>#}
+    {% endif %}
+{% endblock %}
+{% block content %}
+    <div class="card mb-3" style="max-width: 540px; border: none">
+        <div class="row no-gutters">
+            <div class="col-md-4" style="margin-top: 27px">
+                {% if user_object.profile.phote %}
+                    <img src="{{ user_object.profile.photo.url }}" class="card-img-top" alt="user picture">
+                {% else %}
+                    {% load static %}<img src="{% static "default_image.png" %}" class="card-img-top" alt="default photo">
+                {% endif %}
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h2 class="card-title">Profile: {{ user_object.username }}</h2>
+                    <p class="card-text">First Name: <b>{{ user_object.first_name }}</b></p>
+                    <p class="card-text">Last Name: {{ user_object.last_name }}</p>
+                    <p class="card-text">Email: {{ user_object.email }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
