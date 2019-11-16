@@ -1,31 +1,51 @@
 [
 {
   "model": "webapp.product",
-  "pk": 1,
-  "fields": {
-    "name": "Toktogul's life",
-    "category": "book",
-    "description": "kljlk;jdfklnsgkldfnbkls;fjh;lsjfhlk",
-    "image": ""
-  }
-},
-{
-  "model": "webapp.product",
   "pk": 2,
   "fields": {
     "name": "Flight to Kiev",
     "category": "other",
     "description": "jdvkldsdlkbmv",
+    "image": "product_images/chara180129210115_9432_tflqNW8.jpg"
+  }
+},
+{
+  "model": "webapp.product",
+  "pk": 9,
+  "fields": {
+    "name": "jhkdjsg",
+    "category": "book",
+    "description": "ldksfjls;afg",
+    "image": "product_images/chara180130214533_1140.jpg"
+  }
+},
+{
+  "model": "webapp.product",
+  "pk": 10,
+  "fields": {
+    "name": "Toktogul's life book",
+    "category": "book",
+    "description": "kljlk;jdfklnsgkldfnbkls;fjh;lsjfhlk",
+    "image": "product_images/chara180130214544_6908.jpg"
+  }
+},
+{
+  "model": "webapp.product",
+  "pk": 11,
+  "fields": {
+    "name": "Camel",
+    "category": "car",
+    "description": "kjfal",
     "image": ""
   }
 },
 {
   "model": "webapp.review",
-  "pk": 1,
+  "pk": 7,
   "fields": {
-    "author": 1,
-    "product": 1,
-    "text": "jhklj;",
+    "author": 2,
+    "product": 2,
+    "text": "lkjlkdjfs",
     "rating": 5
   }
 }
