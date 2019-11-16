@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block menu %}
-{#        <li><a href="{% url 'webapp:task_add' %}">Add Product</a></li>#}
+        <li><a href="{% url 'webapp:product_add' %}">Add Product</a></li>
 {% endblock %}
 {% block content %}
     <h1>Products</h1>
@@ -19,7 +19,9 @@
                 <tbody>
                     <tr>
                         <th scope="row">{{ forloop.counter }}</th>
-                        <th><img src="{{ product.image.url }}" class="img" alt="product image"></th>
+                        {% if product.image %}
+                            <th><img src="{{ product.image.url }}" class="img" alt="product image"></th>
+                        {% endif %}
                         <td><a href="{% url 'webapp:product_detail' product.pk %}">{{ product.name }}</a></td>
                         <td>{{ product.category }}</td>
                     </tr>
