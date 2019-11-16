@@ -1,8 +1,8 @@
 {% extends "base.html" %}
-{% block title %}Update Product{% endblock %}
+{% block title %}Update Review{% endblock %}
 {% block content %}
-    <h2>Update Product</h2>
-    <form method="POST" action="{% url "webapp:product_update" product.pk %}" enctype="multipart/form-data">
+    <h2>Update Review</h2>
+    <form method="POST" action="{% url "webapp:review_update" review.pk %}" enctype="multipart/form-data">
         {% include 'partial/form.html' %}
         <input type="submit" value="Update" class="btn btn-primary">
     </form>

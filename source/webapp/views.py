@@ -5,7 +5,7 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from webapp.forms import ProductReviewForm
-from webapp.models import Product
+from webapp.models import Product, Review
 
 
 class IndexView(ListView):
@@ -76,5 +76,15 @@ class ProductReviewCreateView(CreateView):
         product = get_object_or_404(Product, pk=product_pk)
         product.product_review.create(author = self.request.user, **form.cleaned_data)
         return redirect('webapp:product_detail', pk=product_pk)
+
+
+class ReviewUpdateView(LoginRequiredMixin, UpdateView):
+    model = Review
+    template_name = 'review/review_update.html'
+    fields = ['text', 'rating']
+    context_object_name = 'review'
+
+    def get_success_url(self):
+        return reverse('webapp:product_detail', kwargs={'pk': self.object.pk})
 
 
