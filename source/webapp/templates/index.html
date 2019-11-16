@@ -14,6 +14,7 @@
                     <th scope="col" style="width: 50%">Name</th>
                     <th scope="col" style="width: 10%">Category</th>
                     <th class="symbol" scope="col">Update</th>
+                    <th class="symbol" scope="col">Delete</th>
                 </tr>
             </thead>
             {% for product in products %}
@@ -26,6 +27,7 @@
                         <td><a href="{% url 'webapp:product_detail' product.pk %}">{{ product.name }}</a></td>
                         <td>{{ product.category }}</td>
                         <td class="symbol"><a href="{% url 'webapp:product_update' product.pk %}">&#x270E;</a></td>
+                        <td class="symbol"><a href="{% url 'webapp:product_delete' product.pk %}">x</a></td>
                     </tr>
                 </tbody>
             {% endfor %}

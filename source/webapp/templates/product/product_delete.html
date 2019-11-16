@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Delete Task{% endblock %}
+{% block menu %}
+    <li><a href="{% url 'webapp:product_detail' product.pk %}">Details</a></li>
+{% endblock %}
+{% block content %}
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h3>Are you sure want to delete product?</h3>
+            <form method="POST" action="{% url "webapp:product_delete" product.pk %}" class="text-center">
+                {% csrf_token %}
+                <p class="lead">{{ product.name }}</p>
+                <hr class="my-4">
+                <button type="submit" class="btn btn-dark" value="Подтвердить">Yes</button>
+                <button type="submit" class="btn btn-dark" value="Submit"><a href="{% url 'webapp:product_detail' product.pk %}">No</a></button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
