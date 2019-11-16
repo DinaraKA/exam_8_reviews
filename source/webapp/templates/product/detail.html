@@ -25,11 +25,11 @@
         {% if is_paginated %}
             {% include 'partial/pagination.html' %}
         {% endif %}
-        <div class="issue-list">
+        <div class="list">
             {% for review in reviews %}
                 <hr>
                 <div class="review">
-                    <p><b>{{ forloop.counter }}. {{ review.author.username }}</b></p>
+                    <p><b>{{ forloop.counter }}.</b><a href="{% url 'accounts:user_detail' user.pk %}">{{ review.author.username }}</a></p>
                     <p>Email: {{ review.author.email }}</p>
                     <div class="pre">{{ review.text }}</div>
                     <div>Rating: {{ review.rating }} from 5</div>
